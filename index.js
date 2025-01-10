@@ -8,7 +8,11 @@
 //Predict the plant growth after 1, 2, and 3 weeks
 
 const spaceRequired = (numWeeks, numPlants = 20, minSpaceRequired = 0.8) => {
-  return numPlants * (minSpaceRequired * (2 ** numWeeks)); //doubling growth is represented by 2 to the power of time
+    if(numWeeks === 0) {
+        return numPlants * minSpaceRequired;
+    } else {
+        return numPlants * (2 ** numWeeks) * minSpaceRequired; //doubling growth is represented by 2 to the power of time. Each new plant requires a minimum of 0.8 square meters
+    }
 };
 
 console.log(
@@ -31,17 +35,17 @@ console.log(
 
 const PI = 3.1415;
 let radius = 5;
-const action = (numWeeks, area = PI * radius * radius, numPlants = 10) => {
+const action = (numWeeks, area = PI * radius * radius, numPlants = 20) => {
     let spaceNeeded = spaceRequired(numWeeks, numPlants);
     let capacity = spaceNeeded/area; // % of the garden that is taken up by the plants after given number of weeks
     if (capacity > 0 && capacity < .5) {
         return 'Plant more plants';
-    } else if (capacity < 0.8) {
+    } else if (capacity > 0 && capacity < 0.8) {
         return 'Monitor plant growth';
     } else if (capacity >= 0.8 && capacity <=1) {
         return 'Please prune plants';
     } else {
-        throw new Error(`Something went wrong, capacity is at ${capacity * 100}%`) ;
+        return `Something went wrong, capacity is at ${capacity * 100}%. You would need ${spaceNeeded} square meters of space to grow these plants` ;
     }
 };
 
@@ -71,8 +75,24 @@ console.log(`If the space remained circular the radius of the new garden would b
 //============================= PART THREE ==================================
 // The scientists decided not to listen to your recommendations, and have instead started with 100 plants in the original 5-meter-radius garden.
 // Use try and catch to wrap your work in an error-handling block. If the amount of space required to hold the originally provided number of plants exceeds the amount of space available, throw a new error and log an appropriate message.
+
+//I chose to duplicate action and named the function action2 so I could throw the error without throwing an error earlier in the program
+const action2 = (numWeeks, area = PI * radius * radius, numPlants = 20) => {
+    let spaceNeeded = spaceRequired(numWeeks, numPlants);
+    let capacity = spaceNeeded/area; // % of the garden that is taken up by the plants after given number of weeks
+    if (capacity > 0 && capacity < .5) {
+        return 'Plant more plants';
+    } else if (capacity < 0.8) {
+        return 'Monitor plant growth';
+    } else if (capacity >= 0.8 && capacity <=1) {
+        return 'Please prune plants';
+    } else {
+        throw new Error(`Something went wrong, capacity is at ${capacity * 100}%. You would need ${spaceNeeded} square meters of space to grow these plants`) ;
+    }
+};
+
 try {
-    action(0, originalArea, 100)
+    action2(0, originalArea, 100);
 } catch (e) {
     console.log(e);
 }
