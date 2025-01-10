@@ -58,8 +58,7 @@ console.log(action(3));
 // Using the logic you have already created, determine:
 // The amount of additional space that would be required if the scientists were to start with 100 plants, and did not prune them for 10 weeks.
 
-// if we're pruning at 80% capacity, then the formula spaceNeeded = spaceRequired/0.8 will tell us how much space we need
-let spaceNeeded = spaceRequired(10, 100) / 0.8; //the space required after 10 weeks when starting with 100 plants
+let spaceNeeded = spaceRequired(10, 100); //the space required after 10 weeks when starting with 100 plants
 
 let originalArea = PI * radius * radius;
 
