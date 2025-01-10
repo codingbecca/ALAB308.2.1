@@ -45,7 +45,7 @@ const action = (numWeeks, area = PI * radius * radius, numPlants = 20) => {
     } else if (capacity >= 0.8 && capacity <=1) {
         return 'Please prune plants';
     } else {
-        return `Something went wrong, capacity is at ${capacity * 100}%. You would need ${spaceNeeded} square meters of space to grow these plants` ;
+        return `Something went wrong, capacity is at ${capacity * 100}%. You would need ${spaceNeeded} square meters of space to grow these plants, you currently have ${area} square meters` ;
     }
 };
 
@@ -87,7 +87,7 @@ const action2 = (numWeeks, area = PI * radius * radius, numPlants = 20) => {
     } else if (capacity >= 0.8 && capacity <=1) {
         return 'Please prune plants';
     } else {
-        throw new Error(`Something went wrong, capacity is at ${capacity * 100}%. You would need ${spaceNeeded} square meters of space to grow these plants`) ;
+        throw new Error(`Something went wrong, capacity is at ${capacity * 100}%. You would need ${spaceNeeded} square meters of space to grow these plants, you currently have ${area} square meters`) ;
     }
 };
 
