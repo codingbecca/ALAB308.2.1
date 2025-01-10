@@ -38,10 +38,10 @@ const action = (numWeeks, area = PI * radius * radius, numPlants = 10) => {
         return 'Plant more plants';
     } else if (capacity < 0.8) {
         return 'Monitor plant growth';
-    } else if (capacity >= 0.8) {
+    } else if (capacity >= 0.8 && capacity <=1) {
         return 'Please prune plants';
     } else {
-        return `Something went wrong, capacity is ${capacity * 100}%`;
+        throw new Error(`Something went wrong, capacity is at ${capacity * 100}%`) ;
     }
 };
 
@@ -67,3 +67,12 @@ console.log(`After 10 weeks, 100 plants will require ${spaceNeeded} square meter
 let newRadius = Math.sqrt(spaceNeeded/PI);
 
 console.log(`If the space remained circular the radius of the new garden would be ${newRadius} meters`);
+
+//============================= PART THREE ==================================
+// The scientists decided not to listen to your recommendations, and have instead started with 100 plants in the original 5-meter-radius garden.
+// Use try and catch to wrap your work in an error-handling block. If the amount of space required to hold the originally provided number of plants exceeds the amount of space available, throw a new error and log an appropriate message.
+try {
+    action(0, originalArea, 100)
+} catch (e) {
+    console.log(e);
+}
